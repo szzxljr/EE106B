@@ -31,6 +31,7 @@ def hat(v):
 		raise ValueError
 
 def adj(g):
+	# print g
 	if g.shape == (4, 4):
 		R = g[0:3,0:3]
 		p = g[0:3,3]
@@ -57,3 +58,25 @@ def rigid(twist):
 			[sin(twist[2]), cos(twist[2]), twist[1]],
 			[0, 0, 1]
 		])
+
+def rotationX(theta):
+
+	return np.array([[1,0,0],
+			[0,cos(theta), -sin(theta)],
+			[0,sin(theta), cos(theta)]
+		])
+
+def rotationY(theta):
+	return np.array([[cos(theta),0,sin(theta)],
+			[0,1,0],
+			[sin(theta),0, -cos(theta)]
+		])
+
+def rotationZ(theta):
+	return np.array([[0,0,1],
+			[cos(theta), -sin(theta),0],
+			[sin(theta), cos(theta),0]
+		])
+
+def rotation(x,y,z):
+	return rotationX(x)*rotationY(y)*rotationZ(z)

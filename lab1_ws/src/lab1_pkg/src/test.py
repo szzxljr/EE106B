@@ -1,17 +1,45 @@
 #!/usr/bin/python
-import rospy
 import numpy as np
-
+import math
+from utils import *
 import baxter_interface
-from baxter_pykdl import baxter_kinematics
+import moveit_commander
+from moveit_msgs.msg import OrientationConstraint, Constraints
+from geometry_msgs.msg import PoseStamped
 
+# import IPython
+import tf
+import tf2_ros
+import time
+import numpy as np
+from utils import *
+from baxter_pykdl import baxter_kinematics
+import signal
+# from controllers import PDJointPositionController, PDJointVelocityController, PDJointTorqueController
+#from paths import LinearPath, CircularPath, MultiplePaths
+
+def lookup_tag(tag_number):
+    
+    listener = tf.TransformListener()
+    from_frame = 'base'
+    to_frame = 'ar_marker_{}'.format(tag_number)
+    # if not listener.frameExists(from_frame) or not listener.frameExists(to_frame):
+    #     print 'Frames not found'
+    #     print 'Did you place AR marker {} within view of the baxter left hand camera?'.format(tag_number)
+    #     exit(0)
+    # t = rospy.Time(0)*
+    # if listener.canTransform(from_frame, to_frame, t):
+    listener.waitForTransform(from_frame, to_frame, rospy.Time(), rospy.Duration(4.0))
+    t = listener.getLatestCommonTime(from_frame, to_frame)
+    tag_pos, tag_rot = listener.lookupTransform(from_frame, to_frame, t)
+    return (tag_pos + tag_rot)    # Return value is a 'list'
 
 def main():
     rospy.init_node('baxter_kinematics')
     '''
     print '*** Baxter PyKDL Kinematics ***\n'
     '''
-    kin = baxter_kinematics('right')
+    kin = baxter_kinematics('left')
     print('\n\n')
 
     '''
@@ -57,21 +85,15 @@ def main():
     #print(M_tilde)
     #print(kin.jacobian_transpose())
     #print(J_inverse)
-    limb = baxter_interface.Limb('right')
-    print(limb.endpoint_pose())
-    pose = limb.endpoint_pose()
-    print(type(pose))
-    print pose.keys
-    print pose.values
+    limb = baxter_interface.Limb('left')
 
-rospy.init_node('baxter_kinematics')
-kin = baxter_kinematics('right')
-print('\n\n')
-limb = baxter_interface.Limb('right')
-pose = limb.endpoint_pose()
-poselist = list(tuple(pose['position']) + tuple(pose['orientation']))
+    tag_pos = lookup_tag(4)
+    tar_joint_angle = kin.inverse_kinematics(tag_pos[:3], tag_pos[3:])
+    print(tar_joint_angle)
 
-print kin.inverse_kinematics(poselist[:3], poselist[3:])
+
+
+
 
 """
 if __name__ == "__main__":

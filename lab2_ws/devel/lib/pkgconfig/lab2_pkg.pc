@@ -1,0 +1,8 @@
+prefix=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab2_ws/devel
+
+Name: lab2_pkg
+Description: Description of lab2_pkg
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab2_ws/devel/lib 
+Requires: 

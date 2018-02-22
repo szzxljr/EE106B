@@ -1,0 +1,2 @@
+lab2_pkg
+-DCATKIN_DEVEL_PREFIX=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab2_ws/devel -DCMAKE_INSTALL_PREFIX=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab2_ws/install -G Unix Makefiles
