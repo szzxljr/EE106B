@@ -46,7 +46,7 @@ def compute_force_closure(contacts, normals, mu):
     # YOUR CODE HERE
     grasp_candidates = []
     grasp_candidates_normals = []
-    factor = 30
+    factor = 5
     length = contacts.shape[0] 
     for i in range(0, length, factor):
         for j in range(0, length, factor):
@@ -55,7 +55,7 @@ def compute_force_closure(contacts, normals, mu):
                 continue
             distance = cal_distance(c1, c2)
             
-            if distance < 0.01 or distance > 0.04:
+            if distance < 0.02 or distance > 0.06:
                 continue
             else:
                 pointVector = (c1 - c2)
@@ -171,8 +171,7 @@ def compute_custom_metric(contacts, normals, mu):
     # YOUR CODE HERE :)
     scores = np.zeros((contacts.shape[0], 1))
     for i in range(contacts.shape[0]):
-        c1 = contacts[i][0:3]
-        c2 = contacts[i][3:]
+        c1, c2 = contacts[i][0:3], contacts[i][3:]
         n1, n2 = normals[i][0:3], normals[i][3:]
         theta1, theta2 = cal_angle(c1 - c2, n1), cal_angle(c1 - c2, n2)
         theta = cal_angle(c1 - c2, np.array([0, 0, 1]))
@@ -181,9 +180,10 @@ def compute_custom_metric(contacts, normals, mu):
         score = score1*0.1 + score2 * 0.9
         scores[i] = score
     max_index = np.where(scores==np.max(scores))[0][0]
+    # print('max_index',max_index.shape)
     return contacts[max_index], normals[max_index]
 
-TAG2OBJ = {'pawn': [-.06, .11]}
+
 
 
     

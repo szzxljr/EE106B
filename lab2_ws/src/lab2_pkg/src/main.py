@@ -26,6 +26,7 @@ from utils import vec, adj
 import scipy
 import copy
 import sys
+import trimesh
 # import cvxpy as cvx
 import Queue
 from grasp_metrics import compute_force_closure, compute_gravity_resistance, compute_custom_metric
@@ -41,40 +42,44 @@ OBJECT_MASS = 0.25 # kg
 # approximate the friction cone as the linear combination of `NUM_FACETS` vectors
 NUM_FACETS = 32
 # set this to false while debugging your grasp analysis
-BAXTER_CONNECTED = False
+BAXTER_CONNECTED = True
 # how many to execute
 NUM_GRASPS = 6
-OBJECT = "pawn"
+OBJECT = "nozzle"
 
 # objects are different this year so you'll have to change this
 # also you can use nodes/object_pose_publisher.py instead of finding the ar tag and then computing T_ar_object in this script.
 if OBJECT == "gearbox":
     MESH_FILENAME = '../objects/gearbox.obj'
     # ar tag on the paper
-    TAG = 8
+    TAG = 3
     # transform between the object and the AR tag on the paper
-    T_ar_object = tfs.translation_matrix([-.09, -.065, 0.106])
+    T_ar_object = tfs.translation_matrix([-.07, -.11, 0.056])
     # how many times to subdivide the mesh
     SUBDIVIDE_STEPS = 0
 elif OBJECT == 'nozzle':
     MESH_FILENAME = '../objects/nozzle.obj'
-    TAG = 9
-    T_ar_object = tfs.translation_matrix([-.09, -.065, 0.035])
-    SUBDIVIDE_STEPS = 1
+    TAG = 8
+    T_ar_object = tfs.translation_matrix([-.065, .09, 0.032])
+    SUBDIVIDE_STEPS = 0
 elif OBJECT == "pawn":
     MESH_FILENAME = '../objects/pawn.obj'
     TAG = 14
-    T_ar_object = tfs.translation_matrix([-.06, .11, 0.038])
+    T_ar_object = tfs.translation_matrix([-.06, -.08, 0.091])#original [-.06, .11, 0.091]
     SUBDIVIDE_STEPS = 0
 
 if BAXTER_CONNECTED:
+    rospy.init_node('moveit_node')
     right_gripper = baxter_gripper.Gripper('right')
 
 listener = tf.TransformListener()
 from_frame = 'base'
 time.sleep(1)
 
-def lookup_tag(tag_number):
+def rigid_transform(tag_pos, tag_rot):
+    return tfs.translation_matrix(tag_pos).dot(tfs.quaternion_matrix(tag_rot))
+
+def g_base_tag(tag_number):
     """ Returns the AR tag position in world coordinates 
 
     Parameters
@@ -95,6 +100,22 @@ def lookup_tag(tag_number):
     tag_pos, tag_rot = listener.lookupTransform(from_frame, to_frame, t)
     return rigid_transform(tag_pos, tag_rot)
 
+# def lookup_tag(tag_number):
+    
+#     listener = tf.TransformListener()
+#     from_frame = 'base'
+#     to_frame = 'ar_marker_{}'.format(tag_number)
+#     # if not listener.frameExists(from_frame) or not listener.frameExists(to_frame):
+#     #     print 'Frames not found'
+#     #     print 'Did you place AR marker {} within view of the baxter left hand camera?'.format(tag_number)
+#     #     exit(0)
+#     # t = rospy.Time(0)*
+#     # if listener.canTransform(from_frame, to_frame, t):
+#     listener.waitForTransform(from_frame, to_frame, rospy.Time(), rospy.Duration(4.0))
+#     t = listener.getLatestCommonTime(from_frame, to_frame)
+#     tag_pos, tag_rot = listener.lookupTransform(from_frame, to_frame, t)
+#     return (tag_pos + tag_rot)    # Return value is a 'list'
+
 def close_gripper():
     """closes the gripper"""
     right_gripper.close(block=True)
@@ -112,6 +133,7 @@ def go_to_pose(pose):
     pose : :obj:`geometry_msgs.msg.Pose`
         The pose to move to
     """
+
     right_arm.set_start_state_to_current_state()
     right_arm.set_pose_target(pose)
     right_arm.plan()
@@ -132,7 +154,7 @@ def execute_grasp(T_object_gripper):
         return
     # YOUR CODE HERE
 
-def contacts_to_baxter_hand_pose(contact1, contact2, approach_direction):
+def contacts_to_baxter_hand_pose(contacts, normals, approach_direction=None):
     """ takes the contacts positions in the object frame and returns the hand pose T_obj_gripper
     
     Parameters
@@ -151,7 +173,14 @@ def contacts_to_baxter_hand_pose(contact1, contact2, approach_direction):
     """
     # YOUR CODE HERE
     # T_obj_gripper = ????
-    return T_obj_gripper
+    target_pos = (contacts[:3] + contacts[3:]) / 2
+    target_normal = - np.cross(normals[:3], normals[3:])
+    target_parallel = contacts[:3] - contacts[3:]
+    # target_rot = np.array( [-0.603, 0.402, -0.456, 0.516]) #gearbox
+    target_rot = np.array( [-0.559, 0.829, -0.019, -0.024]) #nozzle
+    # target_rot = np.array( [0.398, 0.519, 0.609, 0.449]) #pawn
+
+    return np.append(target_pos , target_rot)
 
 def sorted_contacts(vertices, normals, T_ar_object):
     """ takes mesh and returns pairs of contacts and the quality of grasp between the contacts, sorted by quality
@@ -200,21 +229,30 @@ def sorted_contacts(vertices, normals, T_ar_object):
 if __name__ == '__main__':
     if BAXTER_CONNECTED:
         moveit_commander.roscpp_initialize(sys.argv)
-        rospy.init_node('moveit_node')
+        # rospy.init_node('moveit_node')
+        # print('init\n\n\n\n\n')
         robot = moveit_commander.RobotCommander()
         scene = moveit_commander.PlanningSceneInterface()
         right_arm = moveit_commander.MoveGroupCommander('right_arm')
         right_arm.set_planner_id('RRTConnectkConfigDefault')
         right_arm.set_planning_time(5)
+
+        # rospy.Subscriber("tf",tfMessage, callback)
         
     # Main Code
     br = tf.TransformBroadcaster()
 
     # SETUP
-    of = ObjFile(MESH_FILENAME)
-    mesh = of.read()
+    # of = ObjFile(MESH_FILENAME)
+    # mesh = of.read()
+    mesh = trimesh.load(MESH_FILENAME)
 
-    print(T_ar_object)
+    g_base_ar = g_base_tag(TAG)
+    g_base_obj = g_base_ar.dot(T_ar_object)
+    print('g base->ar',g_base_ar)
+    print('g ar->obj',T_ar_object)
+    print('g base->obj' ,g_base_obj)
+
 
     # We found this helped.  You may not.  I believe there was a problem with setting the surface normals.
     # I remember fixing that....but I didn't save that code, so you may have to redo it.  
@@ -224,7 +262,49 @@ if __name__ == '__main__':
 
     vertices = mesh.vertices
     triangles = mesh.triangles
-    normals = mesh.normals
+    # normals = mesh.normals
+    normals = mesh.vertex_normals
+    force_closure = compute_force_closure(vertices, normals, CONTACT_MU)
+    best_contacts_objframe, best_normals_objframe = compute_custom_metric(force_closure[0], force_closure[1], CONTACT_MU)
+    c1, c2 = np.append(best_contacts_objframe[:3], 1),np.append(best_contacts_objframe[3:], 1)
+    best_contacts_baseframe = np.append(g_base_obj.dot(c1.reshape((4, 1)))[0:3] , g_base_obj.dot(c2.reshape((4, 1)))[0:3])
+    print('best_contacts_baseframe',best_contacts_baseframe)
+    best_normals_baseframe = best_normals_objframe
+    hand_pos = contacts_to_baxter_hand_pose(best_contacts_baseframe, best_normals_baseframe)
+    print(hand_pos)
+
+    # open_gripper()
+    # hand_pos1 = hand_pos.copy()
+    # hand_pos1[0] -= .10
+    # hand_pos2 = hand_pos.copy()
+    # hand_pos2[2] += .1
+    # go_to_pose(list(hand_pos1))
+    # rospy.sleep(1)
+    # hand_pos[0] += 0.015
+    # go_to_pose(list(hand_pos))
+    # close_gripper()
+    # go_to_pose(list(hand_pos2))
+    # rospy.sleep(0.5)
+    # go_to_pose(list(hand_pos))
+    # open_gripper()
+
+    open_gripper()
+    hand_pos1 = hand_pos.copy()
+    hand_pos1[2] += .10
+    hand_pos2 = hand_pos.copy()
+    hand_pos2[2] += .1
+    go_to_pose(list(hand_pos1))
+    rospy.sleep(1)
+    # hand_pos[2] -= 0.022
+    hand_pos[2] += 0.01
+    go_to_pose(list(hand_pos))
+    close_gripper()
+    go_to_pose(list(hand_pos2))
+    rospy.sleep(0.5)
+    go_to_pose(list(hand_pos))
+    open_gripper()
+
+
 
     # ??? = sorted_contacts(???)
 

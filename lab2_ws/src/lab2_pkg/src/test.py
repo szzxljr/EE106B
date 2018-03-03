@@ -19,6 +19,7 @@ from autolab_core import RigidTransform, Point, NormalCloud, PointCloud
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 from meshpy import ObjFile
+import trimesh
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 from visualization import Visualizer3D as vis
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -47,23 +48,31 @@ BAXTER_CONNECTED = False
 NUM_GRASPS = 6
 OBJECT = "pawn"
 MESH_FILENAME = '../objects/pawn.obj'
+
+mesh = trimesh.load(MESH_FILENAME)
+# vertices = mesh.vertices
+# triangles = mesh.triangles
+# normals = mesh.normals
+vertices = mesh.vertices
+triangles = mesh.triangles
+normals = -mesh.vertex_normals
+
 of = ObjFile(MESH_FILENAME)
 mesh = of.read()
 
-vertices = mesh.vertices
-triangles = mesh.triangles
-normals = mesh.normals
+# number = min(vertices.shape[0],normals.shape[0])
+# vertices = vertices[:number]
+# normals = normals[:number]
 
-
-
-print('vertices:',vertices)
-print('triangles:',triangles)
-print('normals:',normals)
+# print('vertices:',vertices)
+# print('triangles:',triangles)
+# print('normals:',normals)
 print(vertices.shape)
 print(normals.shape)
 fc = compute_force_closure(vertices, normals, CONTACT_MU)
+# print('fc:',fc)
 best = compute_custom_metric(fc[0], fc[1], CONTACT_MU)
-print(best)
+# print(best)
 # print(fc[0].shape)
 #print('fc', fc)
 
@@ -71,10 +80,12 @@ print(best)
 # contact2 = fc[0][100][3:]
 # normal1 = fc[1][100][0:3]
 # normal2 = fc[1][100][3:]
+
 contact1 = best[0][0:3]
 contact2 = best[0][3:]
 normal1 = best[1][0:3]
 normal2 =  best[1][3:]
+
 # from autolab_core import BagOfPoints
 # point = BagOfPoints(fc[0][0:3, :])
 
