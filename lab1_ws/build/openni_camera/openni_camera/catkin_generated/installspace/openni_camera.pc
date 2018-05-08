@@ -1,0 +1,8 @@
+prefix=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/install
+
+Name: openni_camera
+Description: Description of openni_camera
+Version: 1.11.0
+Cflags: -I/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/install/include -I/usr/include -I/usr/include/ni
+Libs: -L/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/install/lib -lopenni_nodelet -lopenni_driver -l:/usr/lib/x86_64-linux-gnu/libboost_system.so -l:/usr/lib/x86_64-linux-gnu/libboost_filesystem.so -l:/usr/lib/x86_64-linux-gnu/libboost_thread.so -l:/usr/lib/x86_64-linux-gnu/libpthread.so -lOpenNI
+Requires: camera_info_manager dynamic_reconfigure image_transport nodelet roscpp

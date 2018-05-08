@@ -46,8 +46,8 @@ NUM_FACETS = 32
 BAXTER_CONNECTED = False
 # how many to execute
 NUM_GRASPS = 6
-OBJECT = "pawn"
-MESH_FILENAME = '../objects/pawn.obj'
+OBJECT = "gearbox"
+MESH_FILENAME = '../objects/gearbox.obj'
 
 mesh = trimesh.load(MESH_FILENAME)
 # vertices = mesh.vertices

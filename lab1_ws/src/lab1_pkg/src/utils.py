@@ -1,6 +1,12 @@
 import numpy as np
 from math import sin, cos, atan2
 from geometry_msgs.msg._Point import Point
+from collections import deque
+import argparse
+# import imutils
+import cv2
+import rospy
+import time
 
 def vec(*args):
 	if len(args) == 1:
@@ -80,3 +86,92 @@ def rotationZ(theta):
 
 def rotation(x,y,z):
 	return rotationX(x)*rotationY(y)*rotationZ(z)
+
+
+def ball_tracking():
+	# ap = argparse.ArgumentParser()
+	# ap.add_argument("-v", "--video", help="path to the (optional) video file")
+	# args = vars(ap.parse_args())
+	greenLower = (25, 51, 30)
+	greenUpper = (100, 255, 178)
+	x_list = []
+	y_list = []
+	r_list = []
+
+	# if not args.get("video", False):
+	camera = cv2.VideoCapture(0)
+	# else:
+	#     camera = cv2.VideoCapture(args["video"])
+	global image
+
+
+	# raw_input()
+	# start = time.time()
+
+	while True:
+	    (grabbed, frame) = camera.read()
+
+	    # if args.get("video") and not grabbed:
+	    #     break
+
+	    # frame = imutils.resize(frame, width=600)
+	    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+	    mask = cv2.inRange(hsv, greenLower, greenUpper)
+	    mask = cv2.erode(mask, None, iterations=2)
+	    mask = cv2.dilate(mask, None, iterations=2)
+
+	    cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
+	    center = None
+
+	    if len(cnts) > 0:
+	        c = max(cnts, key=cv2.contourArea)
+	        ((x, y), radius) = cv2.minEnclosingCircle(c)
+	        
+	        if radius > 15 and radius < 90:
+	            cv2.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
+	            # print('x:',x)
+	            # print('y',y)
+	            print('radius',radius)
+	            x_list.append(x)
+	            y_list.append(y)
+	            r_list.append(radius)
+
+	    cv2.imshow("Frame", frame)
+	    # cv2.imshow("Mask", mask)
+
+	    key = cv2.waitKey(1) & 0xFF
+	    if key == ord("l"):
+	        break
+
+
+	# end = time.time()
+	# print("time", end - start) 
+
+	camera.release()
+	cv2.destroyAllWindows()
+	x_list.pop(0)
+	y_list.pop(0)
+	r_list.pop(0)
+	x_list.pop(0)
+	y_list.pop(0)
+	r_list.pop(0)
+	x_list.pop(0)
+	y_list.pop(0)
+	r_list.pop(0)
+	for i in range(len(x_list)):
+	    cv2.circle(frame,(int(x_list[i]),int(y_list[i])),int(r_list[i]),(0,0,255),1)
+	cv2.imshow("Frame", frame)
+	cv2.waitKey(0)
+	cv2.destroyAllWindows()
+	inputlist = [x_list[0],y_list[0],r_list[0],x_list[1],y_list[1],r_list[1],x_list[2],y_list[2],r_list[2],x_list[3],y_list[3],r_list[3]]
+
+	return inputlist
+
+def getEndPointPosition(limb):
+    pose = limb.endpoint_pose()
+    poselist = list(tuple(pose['position']) + tuple(pose['orientation']))
+    return poselist # return value is a 7x 'list'
+    
+# while True:
+# 	ball_tracking()

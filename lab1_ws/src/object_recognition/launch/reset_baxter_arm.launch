@@ -1,0 +1,23 @@
+<launch>
+
+<!-- name: ['left_e0', 'left_e1', 'left_s0', 'left_s1', 'left_w0', 'left_w1', 'left_w2']
+position: [-0.44830588525951215, 1.8465293734170667, -0.004601942363656241, -1.0043739208679747, 0.34476218207724674, 0.8018884568671001, -3.0418839023767754] -->
+
+  <!-- Good position for the arm so the camera can see all 3 objects -->
+  <param name="left_w0" value="0.34476218207724674"/>
+  <param name="left_w1" value="0.8018884568671001"/>
+  <param name="left_w2" value="-3.0418839023767754"/>
+  <param name="left_e0" value="-0.44830588525951215"/>
+  <param name="left_e1" value="1.8465293734170667"/>
+  <param name="left_s0" value="-0.004601942363656241"/>
+  <param name="left_s1" value="-1.0043739208679747"/>
+
+  <!-- Specifies which camera to use and the resolution -->
+  <node name="camera_control" pkg="baxter_tools" type="camera_control.py"
+    args="-o left_hand_camera -r 640x400"/>
+
+  <node pkg="baxter_interface" type="joint_trajectory_action_server.py" name="joint_traj_action_srv" output="screen" respawn="false" />
+
+  <node pkg="object_recognition" type="reset_baxter_arm.py" name="reset_baxter_arm" output="screen" respawn="false"/>
+
+</launch>

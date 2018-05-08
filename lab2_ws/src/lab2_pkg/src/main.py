@@ -45,22 +45,22 @@ NUM_FACETS = 32
 BAXTER_CONNECTED = True
 # how many to execute
 NUM_GRASPS = 6
-OBJECT = "nozzle"
+OBJECT = "pawn"
 
 # objects are different this year so you'll have to change this
 # also you can use nodes/object_pose_publisher.py instead of finding the ar tag and then computing T_ar_object in this script.
 if OBJECT == "gearbox":
     MESH_FILENAME = '../objects/gearbox.obj'
     # ar tag on the paper
-    TAG = 3
+    TAG = 10
     # transform between the object and the AR tag on the paper
     T_ar_object = tfs.translation_matrix([-.07, -.11, 0.056])
     # how many times to subdivide the mesh
     SUBDIVIDE_STEPS = 0
 elif OBJECT == 'nozzle':
     MESH_FILENAME = '../objects/nozzle.obj'
-    TAG = 8
-    T_ar_object = tfs.translation_matrix([-.065, .09, 0.032])
+    TAG =12
+    T_ar_object = tfs.translation_matrix([-.065, -.09, 0.032])
     SUBDIVIDE_STEPS = 0
 elif OBJECT == "pawn":
     MESH_FILENAME = '../objects/pawn.obj'
@@ -176,8 +176,8 @@ def contacts_to_baxter_hand_pose(contacts, normals, approach_direction=None):
     target_pos = (contacts[:3] + contacts[3:]) / 2
     target_normal = - np.cross(normals[:3], normals[3:])
     target_parallel = contacts[:3] - contacts[3:]
-    # target_rot = np.array( [-0.603, 0.402, -0.456, 0.516]) #gearbox
-    target_rot = np.array( [-0.559, 0.829, -0.019, -0.024]) #nozzle
+    target_rot = np.array( [-0.603, 0.402, -0.456, 0.516]) #gearbox
+    # target_rot = np.array( [-0.559, 0.829, -0.019, -0.024]) #nozzle
     # target_rot = np.array( [0.398, 0.519, 0.609, 0.449]) #pawn
 
     return np.append(target_pos , target_rot)
@@ -273,37 +273,80 @@ if __name__ == '__main__':
     hand_pos = contacts_to_baxter_hand_pose(best_contacts_baseframe, best_normals_baseframe)
     print(hand_pos)
 
+    
+
+    # nozzle
     # open_gripper()
     # hand_pos1 = hand_pos.copy()
-    # hand_pos1[0] -= .10
+    # hand_pos1[2] += .10
     # hand_pos2 = hand_pos.copy()
     # hand_pos2[2] += .1
+    # hand_pos3 = hand_pos2.copy()
+    # hand_pos3[1] += 0.1
+    # hand_pos4 = hand_pos3.copy()
+    # hand_pos4[2] -= 0.1
     # go_to_pose(list(hand_pos1))
     # rospy.sleep(1)
-    # hand_pos[0] += 0.015
+    # hand_pos[2] += 0.01
     # go_to_pose(list(hand_pos))
     # close_gripper()
     # go_to_pose(list(hand_pos2))
     # rospy.sleep(0.5)
-    # go_to_pose(list(hand_pos))
+    # go_to_pose(list(hand_pos3))
+    # rospy.sleep(0.5)
+    # go_to_pose(list(hand_pos4))
     # open_gripper()
 
+    # # gearbox 
+    # right_gripper.calibrate()
+    # open_gripper()
+    # hand_pos[2] += 0.063
+    # hand_pos[1] -= 0.02
+    # hand_pos1 = hand_pos.copy()
+    # hand_pos1[0] -= .10
+    # hand_pos2 = hand_pos.copy()
+    # hand_pos2[2] += .1
+    # hand_pos3 = hand_pos2.copy()
+    # hand_pos3[1] += 0.1
+    # hand_pos4 = hand_pos3.copy()
+    # hand_pos4[2] -= 0.1
+    # go_to_pose(list(hand_pos1))
+    # rospy.sleep(1)
+    # # hand_pos[2] += 0.01
+    # go_to_pose(list(hand_pos))
+    # close_gripper()
+    # go_to_pose(list(hand_pos2))
+    # rospy.sleep(0.5)
+    # go_to_pose(list(hand_pos3))
+    # rospy.sleep(0.5)
+    # go_to_pose(list(hand_pos4))
+    # open_gripper()
+
+    # pawn
+    right_gripper.calibrate()
     open_gripper()
+    hand_pos[2] += 0.06
+    hand_pos[1] -= 0.02
+    hand_pos[0] -= 0.02
     hand_pos1 = hand_pos.copy()
-    hand_pos1[2] += .10
+    hand_pos1[0] -= .10
     hand_pos2 = hand_pos.copy()
     hand_pos2[2] += .1
+    hand_pos3 = hand_pos2.copy()
+    hand_pos3[1] += 0.1
+    hand_pos4 = hand_pos3.copy()
+    hand_pos4[2] -= 0.1
     go_to_pose(list(hand_pos1))
     rospy.sleep(1)
-    # hand_pos[2] -= 0.022
-    hand_pos[2] += 0.01
+    # hand_pos[2] += 0.01
     go_to_pose(list(hand_pos))
     close_gripper()
     go_to_pose(list(hand_pos2))
     rospy.sleep(0.5)
-    go_to_pose(list(hand_pos))
+    go_to_pose(list(hand_pos3))
+    rospy.sleep(0.5)
+    go_to_pose(list(hand_pos4))
     open_gripper()
-
 
 
     # ??? = sorted_contacts(???)

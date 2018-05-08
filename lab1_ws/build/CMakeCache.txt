@@ -14,8 +14,38 @@
 # EXTERNAL cache entries
 ########################
 
+//The threading library used by boost-thread
+BOOST_THREAD_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libpthread.so
+
 //Build shared libraries (DLLs).
 BUILD_SHARED_LIBS:BOOL=ON
+
+//The directory containing a CMake configuration file for Boost.
+Boost_DIR:PATH=Boost_DIR-NOTFOUND
+
+//Boost filesystem library (debug)
+Boost_FILESYSTEM_LIBRARY_DEBUG:FILEPATH=/usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+
+//Boost filesystem library (release)
+Boost_FILESYSTEM_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+
+//Path to a file.
+Boost_INCLUDE_DIR:PATH=/usr/include
+
+//Boost library directory
+Boost_LIBRARY_DIR:PATH=/usr/lib/x86_64-linux-gnu
+
+//Boost system library (debug)
+Boost_SYSTEM_LIBRARY_DEBUG:FILEPATH=/usr/lib/x86_64-linux-gnu/libboost_system.so
+
+//Boost system library (release)
+Boost_SYSTEM_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libboost_system.so
+
+//Boost thread library (debug)
+Boost_THREAD_LIBRARY_DEBUG:FILEPATH=/usr/lib/x86_64-linux-gnu/libboost_thread.so
+
+//Boost thread library (release)
+Boost_THREAD_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libboost_thread.so
 
 //List of ';' separated packages to exclude
 CATKIN_BLACKLIST_PACKAGES:STRING=
@@ -215,14 +245,23 @@ GTEST_MAIN_LIBRARY:FILEPATH=GTEST_MAIN_LIBRARY-NOTFOUND
 //Path to a library.
 GTEST_MAIN_LIBRARY_DEBUG:FILEPATH=GTEST_MAIN_LIBRARY_DEBUG-NOTFOUND
 
+//Path to a library.
+LIBFREENECT_LIBRARY:FILEPATH=/opt/ros/indigo/lib/libfreenect.so
+
 //lsb_release executable was found
 LSB_FOUND:BOOL=TRUE
 
 //Path to a program.
 LSB_RELEASE_EXECUTABLE:FILEPATH=/usr/bin/lsb_release
 
+//The directory containing a CMake configuration file for Log4cxx.
+Log4cxx_DIR:PATH=Log4cxx_DIR-NOTFOUND
+
 //Path to a program.
 NOSETESTS:FILEPATH=/usr/bin/nosetests-2.7
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python
@@ -254,6 +293,9 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=/usr/include/gtest/gtest.h
 //Path to a file.
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
 
+//Path to a file.
+_file_name:FILEPATH=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/rgbd_launch/test/camera.test
+
 //The directory containing a CMake configuration file for actionlib.
 actionlib_DIR:PATH=/opt/ros/indigo/share/actionlib/cmake
 
@@ -262,6 +304,12 @@ actionlib_msgs_DIR:PATH=/opt/ros/indigo/share/actionlib_msgs/cmake
 
 //The directory containing a CMake configuration file for baxter_core_msgs.
 baxter_core_msgs_DIR:PATH=/scratch/shared/baxter_ws/devel/share/baxter_core_msgs/cmake
+
+//Value Computed by CMake
+baxter_image_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/baxter_image
+
+//Value Computed by CMake
+baxter_image_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/baxter_image
 
 //The directory containing a CMake configuration file for baxter_interface.
 baxter_interface_DIR:PATH=/scratch/shared/baxter_ws/devel/share/baxter_interface/cmake
@@ -272,14 +320,35 @@ baxter_pykdl_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspa
 //Value Computed by CMake
 baxter_pykdl_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/baxter_pykdl
 
+//The directory containing a CMake configuration file for bond.
+bond_DIR:PATH=/opt/ros/indigo/share/bond/cmake
+
+//The directory containing a CMake configuration file for bondcpp.
+bondcpp_DIR:PATH=/opt/ros/indigo/share/bondcpp/cmake
+
+//The directory containing a CMake configuration file for camera_calibration_parsers.
+camera_calibration_parsers_DIR:PATH=/opt/ros/indigo/share/camera_calibration_parsers/cmake
+
+//The directory containing a CMake configuration file for camera_info_manager.
+camera_info_manager_DIR:PATH=/opt/ros/indigo/share/camera_info_manager/cmake
+
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/indigo/share/catkin/cmake
+
+//The directory containing a CMake configuration file for class_loader.
+class_loader_DIR:PATH=/opt/ros/indigo/share/class_loader/cmake
 
 //The directory containing a CMake configuration file for control_msgs.
 control_msgs_DIR:PATH=/opt/ros/indigo/share/control_msgs/cmake
 
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/indigo/share/cpp_common/cmake
+
+//The directory containing a CMake configuration file for diagnostic_msgs.
+diagnostic_msgs_DIR:PATH=/opt/ros/indigo/share/diagnostic_msgs/cmake
+
+//The directory containing a CMake configuration file for diagnostic_updater.
+diagnostic_updater_DIR:PATH=/opt/ros/indigo/share/diagnostic_updater/cmake
 
 //The directory containing a CMake configuration file for dynamic_reconfigure.
 dynamic_reconfigure_DIR:PATH=/opt/ros/indigo/share/dynamic_reconfigure/cmake
@@ -289,6 +358,27 @@ ee106b_lab1_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspac
 
 //Value Computed by CMake
 ee106b_lab1_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/lab1_pkg
+
+//Value Computed by CMake
+freenect_camera_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/freenect_stack/freenect_camera
+
+//Value Computed by CMake
+freenect_camera_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/freenect_stack/freenect_camera
+
+//Value Computed by CMake
+freenect_launch_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/freenect_stack/freenect_launch
+
+//Value Computed by CMake
+freenect_launch_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/freenect_stack/freenect_launch
+
+//Dependencies for the target
+freenect_nodelet_LIB_DEPENDS:STATIC=general;/opt/ros/indigo/lib/libcamera_info_manager.so;general;/opt/ros/indigo/lib/libcamera_calibration_parsers.so;general;/opt/ros/indigo/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/indigo/lib/libimage_transport.so;general;/opt/ros/indigo/lib/libmessage_filters.so;general;/opt/ros/indigo/lib/libnodeletlib.so;general;/opt/ros/indigo/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/indigo/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_signals.so;general;/opt/ros/indigo/lib/libxmlrpcpp.so;general;/opt/ros/indigo/lib/libroscpp_serialization.so;general;/opt/ros/indigo/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/indigo/lib/librosconsole.so;general;/opt/ros/indigo/lib/librosconsole_log4cxx.so;general;/opt/ros/indigo/lib/librosconsole_backend_interface.so;general;/usr/lib/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/indigo/lib/librostime.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/opt/ros/indigo/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so;general;/opt/ros/indigo/lib/libroslib.so;general;/opt/ros/indigo/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/indigo/lib/libfreenect.so;general;log4cxx;
+
+//Value Computed by CMake
+freenect_stack_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/freenect_stack/freenect_stack
+
+//Value Computed by CMake
+freenect_stack_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/freenect_stack/freenect_stack
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/indigo/share/gencpp/cmake
@@ -330,6 +420,9 @@ gtest_force_shared_crt:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
+//The directory containing a CMake configuration file for image_transport.
+image_transport_DIR:PATH=/opt/ros/indigo/share/image_transport/cmake
+
 //Path to a library.
 lib:FILEPATH=/opt/ros/indigo/lib/libdynamic_reconfigure_config_init_mutex.so
 
@@ -341,6 +434,48 @@ message_generation_DIR:PATH=/opt/ros/indigo/share/message_generation/cmake
 
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/indigo/share/message_runtime/cmake
+
+//The directory containing a CMake configuration file for nodelet.
+nodelet_DIR:PATH=/opt/ros/indigo/share/nodelet/cmake
+
+//Value Computed by CMake
+object_recognition_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/object_recognition
+
+//Value Computed by CMake
+object_recognition_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/object_recognition
+
+//Value Computed by CMake
+openni_camera_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/openni_camera/openni_camera
+
+//Value Computed by CMake
+openni_camera_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/openni_camera/openni_camera
+
+//Value Computed by CMake
+openni_description_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/openni_camera/openni_description
+
+//Value Computed by CMake
+openni_description_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/openni_camera/openni_description
+
+//Dependencies for the target
+openni_driver_LIB_DEPENDS:STATIC=general;/opt/ros/indigo/lib/libcamera_info_manager.so;general;/opt/ros/indigo/lib/libcamera_calibration_parsers.so;general;/opt/ros/indigo/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/indigo/lib/libimage_transport.so;general;/opt/ros/indigo/lib/libmessage_filters.so;general;/opt/ros/indigo/lib/libnodeletlib.so;general;/opt/ros/indigo/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/indigo/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/indigo/lib/libroslib.so;general;/opt/ros/indigo/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/indigo/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_signals.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/indigo/lib/librosconsole.so;general;/opt/ros/indigo/lib/librosconsole_log4cxx.so;general;/opt/ros/indigo/lib/librosconsole_backend_interface.so;general;/usr/lib/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/indigo/lib/libxmlrpcpp.so;general;/opt/ros/indigo/lib/libroscpp_serialization.so;general;/opt/ros/indigo/lib/librostime.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/opt/ros/indigo/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;OpenNI;general;usb-1.0;general;log4cxx;
+
+//Value Computed by CMake
+openni_launch_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/openni_camera/openni_launch
+
+//Value Computed by CMake
+openni_launch_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/openni_camera/openni_launch
+
+//Dependencies for the target
+openni_nodelet_LIB_DEPENDS:STATIC=general;openni_driver;general;/opt/ros/indigo/lib/libcamera_info_manager.so;general;/opt/ros/indigo/lib/libcamera_calibration_parsers.so;general;/opt/ros/indigo/lib/libdynamic_reconfigure_config_init_mutex.so;general;/opt/ros/indigo/lib/libimage_transport.so;general;/opt/ros/indigo/lib/libmessage_filters.so;general;/opt/ros/indigo/lib/libnodeletlib.so;general;/opt/ros/indigo/lib/libbondcpp.so;general;/usr/lib/x86_64-linux-gnu/libuuid.so;general;/opt/ros/indigo/lib/libclass_loader.so;general;/usr/lib/libPocoFoundation.so;general;/usr/lib/x86_64-linux-gnu/libdl.so;general;/opt/ros/indigo/lib/libroslib.so;general;/opt/ros/indigo/lib/librospack.so;general;/usr/lib/x86_64-linux-gnu/libpython2.7.so;general;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;general;/usr/lib/x86_64-linux-gnu/libtinyxml.so;general;/opt/ros/indigo/lib/libroscpp.so;general;/usr/lib/x86_64-linux-gnu/libboost_signals.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/opt/ros/indigo/lib/librosconsole.so;general;/opt/ros/indigo/lib/librosconsole_log4cxx.so;general;/opt/ros/indigo/lib/librosconsole_backend_interface.so;general;/usr/lib/liblog4cxx.so;general;/usr/lib/x86_64-linux-gnu/libboost_regex.so;general;/opt/ros/indigo/lib/libxmlrpcpp.so;general;/opt/ros/indigo/lib/libroscpp_serialization.so;general;/opt/ros/indigo/lib/librostime.so;general;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;general;/opt/ros/indigo/lib/libcpp_common.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;general;/usr/lib/x86_64-linux-gnu/libconsole_bridge.so;general;/usr/lib/x86_64-linux-gnu/libboost_system.so;general;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;general;/usr/lib/x86_64-linux-gnu/libboost_thread.so;general;/usr/lib/x86_64-linux-gnu/libpthread.so;
+
+//The directory containing a CMake configuration file for pluginlib.
+pluginlib_DIR:PATH=/opt/ros/indigo/share/pluginlib/cmake
+
+//Value Computed by CMake
+rgbd_launch_BINARY_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/rgbd_launch
+
+//Value Computed by CMake
+rgbd_launch_SOURCE_DIR:STATIC=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/src/rgbd_launch
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/indigo/share/rosconsole/cmake
@@ -360,14 +495,29 @@ rosgraph_DIR:PATH=/opt/ros/indigo/share/rosgraph/cmake
 //The directory containing a CMake configuration file for rosgraph_msgs.
 rosgraph_msgs_DIR:PATH=/opt/ros/indigo/share/rosgraph_msgs/cmake
 
+//The directory containing a CMake configuration file for roslaunch.
+roslaunch_DIR:PATH=/opt/ros/indigo/share/roslaunch/cmake
+
+//The directory containing a CMake configuration file for roslib.
+roslib_DIR:PATH=/opt/ros/indigo/share/roslib/cmake
+
+//The directory containing a CMake configuration file for rospack.
+rospack_DIR:PATH=/opt/ros/indigo/share/rospack/cmake
+
 //The directory containing a CMake configuration file for rospy.
 rospy_DIR:PATH=/opt/ros/indigo/share/rospy/cmake
+
+//The directory containing a CMake configuration file for rostest.
+rostest_DIR:PATH=/opt/ros/indigo/share/rostest/cmake
 
 //The directory containing a CMake configuration file for rostime.
 rostime_DIR:PATH=/opt/ros/indigo/share/rostime/cmake
 
 //The directory containing a CMake configuration file for sensor_msgs.
 sensor_msgs_DIR:PATH=/opt/ros/indigo/share/sensor_msgs/cmake
+
+//The directory containing a CMake configuration file for smclib.
+smclib_DIR:PATH=/opt/ros/indigo/share/smclib/cmake
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/indigo/share/std_msgs/cmake
@@ -398,6 +548,24 @@ xmlrpcpp_DIR:PATH=/opt/ros/indigo/share/xmlrpcpp/cmake
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: Boost_DIR
+Boost_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_FILESYSTEM_LIBRARY_DEBUG
+Boost_FILESYSTEM_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_FILESYSTEM_LIBRARY_RELEASE
+Boost_FILESYSTEM_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_INCLUDE_DIR
+Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_LIBRARY_DIR
+Boost_LIBRARY_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_SYSTEM_LIBRARY_DEBUG
+Boost_SYSTEM_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_SYSTEM_LIBRARY_RELEASE
+Boost_SYSTEM_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_THREAD_LIBRARY_DEBUG
+Boost_THREAD_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_THREAD_LIBRARY_RELEASE
+Boost_THREAD_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //catkin environment
 CATKIN_ENV:INTERNAL=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/catkin_generated/env_cached.sh
 CATKIN_TEST_RESULTS_DIR:INTERNAL=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/test_results
@@ -495,7 +663,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=12
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -536,6 +704,8 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.26()]
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python][v2.7.6()]
 //Details about finding Threads
@@ -555,10 +725,160 @@ GTEST_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GTEST_MAIN_LIBRARY_DEBUG
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+LIBFREENECT_CFLAGS:INTERNAL=-I/opt/ros/indigo/include/libfreenect;-I/usr/include/libusb-1.0
+LIBFREENECT_CFLAGS_I:INTERNAL=
+LIBFREENECT_CFLAGS_OTHER:INTERNAL=
+LIBFREENECT_FOUND:INTERNAL=1
+LIBFREENECT_INCLUDEDIR:INTERNAL=/opt/ros/indigo/include/libfreenect
+LIBFREENECT_INCLUDE_DIRS:INTERNAL=/opt/ros/indigo/include/libfreenect;/usr/include/libusb-1.0
+LIBFREENECT_LDFLAGS:INTERNAL=-L/opt/ros/indigo/lib;-lfreenect
+LIBFREENECT_LDFLAGS_OTHER:INTERNAL=
+LIBFREENECT_LIBDIR:INTERNAL=/opt/ros/indigo/lib
+LIBFREENECT_LIBRARIES:INTERNAL=freenect
+LIBFREENECT_LIBRARY_DIRS:INTERNAL=/opt/ros/indigo/lib
+LIBFREENECT_LIBS:INTERNAL=
+LIBFREENECT_LIBS_L:INTERNAL=
+LIBFREENECT_LIBS_OTHER:INTERNAL=
+LIBFREENECT_LIBS_PATHS:INTERNAL=
+LIBFREENECT_PREFIX:INTERNAL=/opt/ros/indigo
+LIBFREENECT_STATIC_CFLAGS:INTERNAL=-I/opt/ros/indigo/include/libfreenect;-I/usr/include/libusb-1.0
+LIBFREENECT_STATIC_CFLAGS_I:INTERNAL=
+LIBFREENECT_STATIC_CFLAGS_OTHER:INTERNAL=
+LIBFREENECT_STATIC_INCLUDE_DIRS:INTERNAL=/opt/ros/indigo/include/libfreenect;/usr/include/libusb-1.0
+LIBFREENECT_STATIC_LDFLAGS:INTERNAL=-pthread;-L/opt/ros/indigo/lib;-lfreenect;-lusb-1.0;-ludev
+LIBFREENECT_STATIC_LDFLAGS_OTHER:INTERNAL=
+LIBFREENECT_STATIC_LIBDIR:INTERNAL=
+LIBFREENECT_STATIC_LIBRARIES:INTERNAL=freenect;usb-1.0;udev
+LIBFREENECT_STATIC_LIBRARY_DIRS:INTERNAL=/opt/ros/indigo/lib
+LIBFREENECT_STATIC_LIBS:INTERNAL=
+LIBFREENECT_STATIC_LIBS_L:INTERNAL=
+LIBFREENECT_STATIC_LIBS_OTHER:INTERNAL=
+LIBFREENECT_STATIC_LIBS_PATHS:INTERNAL=
+LIBFREENECT_VERSION:INTERNAL=0.5
+LIBFREENECT_libfreenect_INCLUDEDIR:INTERNAL=
+LIBFREENECT_libfreenect_LIBDIR:INTERNAL=
+LIBFREENECT_libfreenect_PREFIX:INTERNAL=
+LIBFREENECT_libfreenect_VERSION:INTERNAL=
+LOG4CXX_CFLAGS:INTERNAL=
+LOG4CXX_CFLAGS_I:INTERNAL=
+LOG4CXX_CFLAGS_OTHER:INTERNAL=
+LOG4CXX_FOUND:INTERNAL=1
+LOG4CXX_INCLUDEDIR:INTERNAL=/usr/include
+LOG4CXX_INCLUDE_DIRS:INTERNAL=
+LOG4CXX_LDFLAGS:INTERNAL=-llog4cxx
+LOG4CXX_LDFLAGS_OTHER:INTERNAL=
+LOG4CXX_LIBDIR:INTERNAL=/usr/lib
+LOG4CXX_LIBRARIES:INTERNAL=log4cxx
+LOG4CXX_LIBRARY_DIRS:INTERNAL=
+LOG4CXX_LIBS:INTERNAL=
+LOG4CXX_LIBS_L:INTERNAL=
+LOG4CXX_LIBS_OTHER:INTERNAL=
+LOG4CXX_LIBS_PATHS:INTERNAL=
+LOG4CXX_PREFIX:INTERNAL=/usr
+LOG4CXX_STATIC_CFLAGS:INTERNAL=
+LOG4CXX_STATIC_CFLAGS_I:INTERNAL=
+LOG4CXX_STATIC_CFLAGS_OTHER:INTERNAL=
+LOG4CXX_STATIC_INCLUDE_DIRS:INTERNAL=
+LOG4CXX_STATIC_LDFLAGS:INTERNAL=-llog4cxx
+LOG4CXX_STATIC_LDFLAGS_OTHER:INTERNAL=
+LOG4CXX_STATIC_LIBDIR:INTERNAL=
+LOG4CXX_STATIC_LIBRARIES:INTERNAL=log4cxx
+LOG4CXX_STATIC_LIBRARY_DIRS:INTERNAL=
+LOG4CXX_STATIC_LIBS:INTERNAL=
+LOG4CXX_STATIC_LIBS_L:INTERNAL=
+LOG4CXX_STATIC_LIBS_OTHER:INTERNAL=
+LOG4CXX_STATIC_LIBS_PATHS:INTERNAL=
+LOG4CXX_VERSION:INTERNAL=0.10.0
+LOG4CXX_liblog4cxx_INCLUDEDIR:INTERNAL=
+LOG4CXX_liblog4cxx_LIBDIR:INTERNAL=
+LOG4CXX_liblog4cxx_PREFIX:INTERNAL=
+LOG4CXX_liblog4cxx_VERSION:INTERNAL=
+PC_LIBOPENNI_CFLAGS:INTERNAL=-I/usr/include/ni
+PC_LIBOPENNI_CFLAGS_I:INTERNAL=
+PC_LIBOPENNI_CFLAGS_OTHER:INTERNAL=
+PC_LIBOPENNI_FOUND:INTERNAL=1
+PC_LIBOPENNI_INCLUDEDIR:INTERNAL=/usr/include/ni
+PC_LIBOPENNI_INCLUDE_DIRS:INTERNAL=/usr/include/ni
+PC_LIBOPENNI_LDFLAGS:INTERNAL=-lOpenNI
+PC_LIBOPENNI_LDFLAGS_OTHER:INTERNAL=
+PC_LIBOPENNI_LIBDIR:INTERNAL=/usr/lib
+PC_LIBOPENNI_LIBRARIES:INTERNAL=OpenNI
+PC_LIBOPENNI_LIBRARY_DIRS:INTERNAL=
+PC_LIBOPENNI_LIBS:INTERNAL=
+PC_LIBOPENNI_LIBS_L:INTERNAL=
+PC_LIBOPENNI_LIBS_OTHER:INTERNAL=
+PC_LIBOPENNI_LIBS_PATHS:INTERNAL=
+PC_LIBOPENNI_PREFIX:INTERNAL=/usr
+PC_LIBOPENNI_STATIC_CFLAGS:INTERNAL=-I/usr/include/ni
+PC_LIBOPENNI_STATIC_CFLAGS_I:INTERNAL=
+PC_LIBOPENNI_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_LIBOPENNI_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/ni
+PC_LIBOPENNI_STATIC_LDFLAGS:INTERNAL=-lOpenNI
+PC_LIBOPENNI_STATIC_LDFLAGS_OTHER:INTERNAL=
+PC_LIBOPENNI_STATIC_LIBDIR:INTERNAL=
+PC_LIBOPENNI_STATIC_LIBRARIES:INTERNAL=OpenNI
+PC_LIBOPENNI_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_LIBOPENNI_STATIC_LIBS:INTERNAL=
+PC_LIBOPENNI_STATIC_LIBS_L:INTERNAL=
+PC_LIBOPENNI_STATIC_LIBS_OTHER:INTERNAL=
+PC_LIBOPENNI_STATIC_LIBS_PATHS:INTERNAL=
+PC_LIBOPENNI_VERSION:INTERNAL=1.5.4.0
+PC_LIBOPENNI_libopenni_INCLUDEDIR:INTERNAL=
+PC_LIBOPENNI_libopenni_LIBDIR:INTERNAL=
+PC_LIBOPENNI_libopenni_PREFIX:INTERNAL=
+PC_LIBOPENNI_libopenni_VERSION:INTERNAL=
+PC_LIBUSB_CFLAGS:INTERNAL=-I/usr/include/libusb-1.0
+PC_LIBUSB_CFLAGS_I:INTERNAL=
+PC_LIBUSB_CFLAGS_OTHER:INTERNAL=
+PC_LIBUSB_FOUND:INTERNAL=1
+PC_LIBUSB_INCLUDEDIR:INTERNAL=/usr/include
+PC_LIBUSB_INCLUDE_DIRS:INTERNAL=/usr/include/libusb-1.0
+PC_LIBUSB_LDFLAGS:INTERNAL=-lusb-1.0
+PC_LIBUSB_LDFLAGS_OTHER:INTERNAL=
+PC_LIBUSB_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+PC_LIBUSB_LIBRARIES:INTERNAL=usb-1.0
+PC_LIBUSB_LIBRARY_DIRS:INTERNAL=
+PC_LIBUSB_LIBS:INTERNAL=
+PC_LIBUSB_LIBS_L:INTERNAL=
+PC_LIBUSB_LIBS_OTHER:INTERNAL=
+PC_LIBUSB_LIBS_PATHS:INTERNAL=
+PC_LIBUSB_PREFIX:INTERNAL=/usr
+PC_LIBUSB_STATIC_CFLAGS:INTERNAL=-I/usr/include/libusb-1.0
+PC_LIBUSB_STATIC_CFLAGS_I:INTERNAL=
+PC_LIBUSB_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_LIBUSB_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/libusb-1.0
+PC_LIBUSB_STATIC_LDFLAGS:INTERNAL=-pthread;-lusb-1.0;-ludev
+PC_LIBUSB_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_LIBUSB_STATIC_LIBDIR:INTERNAL=
+PC_LIBUSB_STATIC_LIBRARIES:INTERNAL=usb-1.0;udev
+PC_LIBUSB_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_LIBUSB_STATIC_LIBS:INTERNAL=
+PC_LIBUSB_STATIC_LIBS_L:INTERNAL=
+PC_LIBUSB_STATIC_LIBS_OTHER:INTERNAL=
+PC_LIBUSB_STATIC_LIBS_PATHS:INTERNAL=
+PC_LIBUSB_VERSION:INTERNAL=1.0.20
+PC_LIBUSB_libusb-1.0_INCLUDEDIR:INTERNAL=
+PC_LIBUSB_libusb-1.0_LIBDIR:INTERNAL=
+PC_LIBUSB_libusb-1.0_PREFIX:INTERNAL=
+PC_LIBUSB_libusb-1.0_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_EXECUTABLE
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //This needs to be in PYTHONPATH when 'setup.py install' is called.
 //  And it needs to match.  But setuptools won't tell us where
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
+//Components requested for this build tree.
+_Boost_COMPONENTS_SEARCHED:INTERNAL=filesystem;system;thread
+//Last used Boost_INCLUDE_DIR value.
+_Boost_INCLUDE_DIR_LAST:INTERNAL=/usr/include
+//Last used Boost_LIBRARY_DIR value.
+_Boost_LIBRARY_DIR_LAST:INTERNAL=/usr/lib/x86_64-linux-gnu
+//Last used Boost_USE_MULTITHREADED value.
+_Boost_USE_MULTITHREADED_LAST:INTERNAL=TRUE
+__pkg_config_checked_LIBFREENECT:INTERNAL=1
+__pkg_config_checked_LOG4CXX:INTERNAL=1
+__pkg_config_checked_PC_LIBOPENNI:INTERNAL=1
+__pkg_config_checked_PC_LIBUSB:INTERNAL=1
 

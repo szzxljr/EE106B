@@ -118,7 +118,15 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/gtest/cmake_install.cmake")
   INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/lab1_pkg/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/freenect_stack/freenect_launch/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/freenect_stack/freenect_stack/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/openni_camera/openni_launch/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/freenect_stack/freenect_camera/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/object_recognition/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/openni_camera/openni_camera/cmake_install.cmake")
   INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/baxter_pykdl/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/rgbd_launch/cmake_install.cmake")
+  INCLUDE("/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/build/openni_camera/openni_description/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

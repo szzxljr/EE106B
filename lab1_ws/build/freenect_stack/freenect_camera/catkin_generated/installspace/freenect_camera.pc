@@ -1,0 +1,8 @@
+prefix=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/install
+
+Name: freenect_camera
+Description: Description of freenect_camera
+Version: 0.4.2
+Cflags: -I/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/install/include
+Libs: -L/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/install/lib 
+Requires: camera_info_manager diagnostic_updater dynamic_reconfigure image_transport nodelet roscpp sensor_msgs

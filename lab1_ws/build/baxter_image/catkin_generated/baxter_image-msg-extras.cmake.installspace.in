@@ -1,0 +1,2 @@
+set(baxter_image_MESSAGE_FILES "msg/ObjectInfo.msg")
+set(baxter_image_SERVICE_FILES "")

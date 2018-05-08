@@ -263,7 +263,7 @@ if __name__ == '__main__':
             sys.exit(1)
 
         # environment at generation time
-        CMAKE_PREFIX_PATH = '/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/devel;/scratch/shared/baxter_ws/devel;/opt/ros/indigo'.split(';')
+        CMAKE_PREFIX_PATH = '/scratch/shared/baxter_ws/devel;/opt/ros/indigo'.split(';')
         # prepend current workspace if not already part of CPP
         base_path = os.path.dirname(__file__)
         if base_path not in CMAKE_PREFIX_PATH:
