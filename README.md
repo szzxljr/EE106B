@@ -19,4 +19,7 @@ We build a robotic ball-catching system from Rethink Robotics Baxter Robot arm. 
 
 We use a humanoid robot Baxter with a basket (only the arm is moving), a usb webcam and a standard PC with Ubuntu. In our work, we not only implement the physical model to predict the ball trajectory but also using machine learning model. Then, we compare the results of this two models and analyze their performances. It turns out that the machine learning model can get a lower error rate and a better result.
 
-The website of our project is https://baxter-catching-ball.weebly.com.
+The poster and final report of our project is in the final_project/materials folder. The website of our project is https://baxter-catching-ball.weebly.com.
+
+
+
