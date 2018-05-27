@@ -1,13 +1,22 @@
 # EECS106B Robotic Manipulation and Interaction - Spring 2018 - UC Berkeley
 ## Labs and Project Code 
 
-## Lab 1
+## Lab 1 Trajectory Tracking with Baxter
+Implemented closed-loop control with baxter including workspace, joint velocity, and joint torque control. Compared the speed and accuracy of the trajectory following with each.
 
-## Lab 2
+## Lab 2 Grasp Planning with Baxter and Sawyer
+Planned and executed a grasp with Baxter consisting of detecting the object to grasp, planning a stable grasp, moving into position, closing the grippers, and lifting.
 
-## Lab 3
+## Lab 3 Constrained Control with Turtlebots
+Developed controllers using motion contstraint to control a robot subject to constraints such as
+1. Onstacle Avoidance
+2. Non-holonomic dynamics (e.g. cars)
 
-## Lab 4
+## Lab 4 Soft Robotics
+Used the soft robotics circuit and finger to 
+1. Calibrate the ﬂex sensor and pressure sensor.
+2. Create two separate PID controllers for the finger angle with the following sensors flex sensor that measures bending and pressure sensor as feedback.
+3. Compare the two controllers in terms of performance and usefulness.
 
 ## Final Project
 
