@@ -1,5 +1,5 @@
 # EECS106B Robotic Manipulation and Interaction - Spring 2018 - UC Berkeley
-## Labs and Project Code 
+
 
 ## Lab 1 Trajectory Tracking with Baxter
 Implemented closed-loop control with baxter including workspace, joint velocity, and joint torque control. Compared the speed and accuracy of the trajectory following with each.
@@ -36,7 +36,11 @@ We build a robotic ball-catching system from Rethink Robotics Baxter Robot arm. 
 
 We use a humanoid robot Baxter with a basket (only the arm is moving), a usb webcam and a standard PC with Ubuntu. In our work, we not only implement the physical model to predict the ball trajectory but also using machine learning model. Then, we compare the results of this two models and analyze their performances. It turns out that the machine learning model can get a lower error rate and a better result.
 
-The poster and final report of our project is in the final_project/materials folder. The website of our project is https://baxter-catching-ball.weebly.com.
+The poster and final report of our project is in the final_project/materials folder. 
+
+The website of our project is https://baxter-catching-ball.weebly.com.
+
+Labs and Project Codes done by Yichi Zhang, Jingjun Liu and Jiarong Li.
 
 
 
