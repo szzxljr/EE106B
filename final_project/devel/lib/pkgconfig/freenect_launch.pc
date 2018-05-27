@@ -1,0 +1,8 @@
+prefix=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/devel
+
+Name: freenect_launch
+Description: Description of freenect_launch
+Version: 0.4.2
+Cflags: 
+Libs: -L/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/devel/lib 
+Requires: 

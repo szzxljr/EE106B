@@ -1,0 +1,8 @@
+prefix=/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/devel
+
+Name: object_recognition
+Description: Description of object_recognition
+Version: 0.0.0
+Cflags: -I/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/devel/include
+Libs: -L/home/cc/ee106b/sp18/class/ee106b-aaf/ros_workspaces/lab1_ws/devel/lib 
+Requires: 
